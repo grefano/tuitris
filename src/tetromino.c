@@ -165,23 +165,7 @@ static void create_random_tetromino(Tetromino* t){
 /* Creates the next tetromino */
 static void next_tetromino(void)
 {
-<<<<<<< HEAD
-    next.pos.y = 1; next.pos.x = 4;
-    next.type  = rand() % TETROMINO_COUNT;
-    next.shape = INITIAL_SHAPES[next.type];
-    next.color = TYPE_COLOR[next.type];
-    if (rand() % 2) {
-        for (int i = 0; i < SHAPE_SIZE; ++i) {
-            rotate_block(&next.shape.blocks[i], 1);
-        }
-    }
-=======
     create_random_tetromino(&next);
-}
-static void hold_tetromino(void)
-{
-    create_random_tetromino(&hold);
->>>>>>> 7096b13 (hold tetromino and counter-clockwise rotation)
 }
 
 // === Public API =============================================================
@@ -232,17 +216,15 @@ void tetromino_hold(void)
 {
     remove_tetromino();
 
-
     Tetromino previous_hold = hold;
     
     create_tetromino(&hold, t.type); 
 
     t = has_hold ? previous_hold : next;
     if (!has_hold){
-      next_tetromino();
-      has_hold = true;
+	next_tetromino();
+	has_hold = true;
     }
-
 
     place_tetromino();
 }
