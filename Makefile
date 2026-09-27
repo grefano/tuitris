@@ -25,7 +25,7 @@ $(TRG): $(APP_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 test: $(TST_TRG)
-	@./$(TST_TRG)
+	@./$(TST_TRG) > /dev/null
 
 $(TST_TRG): $(TST_OBJ) $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@

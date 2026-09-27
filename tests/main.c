@@ -1,3 +1,5 @@
+#define TDRAW_IMPL
+#include "tdraw.h"
 #include <stdio.h>
 #include <unistd.h>
 
@@ -16,13 +18,13 @@ static void test(void (*test_suite)(void), const char* name)
 
 int main(void)
 {
-    printf("Tuitris unit tests\n");
-    printf("=================================================\n");
+    fprintf(stderr, "Tuitris unit tests\n");
+    fprintf(stderr, "=================================================\n");
 
     TEST(test_board);
     TEST(test_state);
 
-    printf("\nAll tests passed!\n");
+    fprintf(stderr, "\nAll tests passed!\n");
     return 0;
 }
 
