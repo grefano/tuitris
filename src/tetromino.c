@@ -167,10 +167,6 @@ static void next_tetromino(void)
 {
     create_random_tetromino(&next);
 }
-static void hold_tetromino(void)
-{
-    create_random_tetromino(&hold);
-}
 
 // === Public API =============================================================
 void tetromino_init(void)
@@ -220,17 +216,15 @@ void tetromino_hold(void)
 {
     remove_tetromino();
 
-
     Tetromino previous_hold = hold;
     
     create_tetromino(&hold, t.type); 
 
     t = has_hold ? previous_hold : next;
     if (!has_hold){
-      next_tetromino();
-      has_hold = true;
+	next_tetromino();
+	has_hold = true;
     }
-
 
     place_tetromino();
 }
