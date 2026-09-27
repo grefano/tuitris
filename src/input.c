@@ -40,8 +40,15 @@ InputEvent get_user_input(void)
 		}
 
 		switch (c) {
+<<<<<<< HEAD
 			case 'q' : return INPUT_QUIT;
 			case ' ' : case 'r': return INPUT_ROTATE_CW;
+=======
+			case 'q': return INPUT_QUIT;
+			case ' ': case 'r': return INPUT_ROTATE_CW;
+			case 'z': return INPUT_ROTATE_CCW;
+			case 'c': return INPUT_HOLD; 
+>>>>>>> 7096b13 (hold tetromino and counter-clockwise rotation)
 			case '\n': return INPUT_SELECT;
             case '+' : return INPUT_PLUS;
             case '-' : return INPUT_MINUS;
