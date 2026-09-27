@@ -47,7 +47,7 @@ static void draw_board_border(void)
 {
     tdraw_draw_at(y + 1, x + 1, C_DIM C_CYAN BAR_FILL C_RESET);
     for (int i = 0; i < BOARD_ROWS; ++i) {
-        tdraw_draw_at(y + 2 + i, x + 1, C_DIM C_CYAN BLOCK_FILL C_RESET);
+        tdraw_draw_at(y + 2 + i, x + 1,                  C_DIM C_CYAN BLOCK_FILL C_RESET);
         tdraw_draw_at(y + 2 + i, x + 3 + BOARD_COLS * 2, C_DIM C_CYAN BLOCK_FILL C_RESET);
     }
     tdraw_draw_at(y + 2 + BOARD_ROWS, x + 1, C_DIM C_CYAN BAR_FILL C_RESET);
@@ -73,7 +73,7 @@ static void draw_frame(void)
 {
     int panel_start = x + BOARD_WIDTH + 3;
     tdraw_set_color(C_DIM C_BLUE);
-    tdraw_draw_frame(y, x, y + BOARD_HIGHT + 1, panel_start);
+    tdraw_draw_frame(y, x,           y + BOARD_HIGHT + 1, panel_start);
     tdraw_draw_frame(y, panel_start, y + BOARD_HIGHT + 1, panel_start + PANEL_WIDTH + 1);
     tdraw_draw_at(y, panel_start, "┬");
     tdraw_draw_at(y + BOARD_HIGHT + 1, panel_start, "┴");
@@ -98,9 +98,9 @@ static void draw_tetromino_preview(TetrominoPeek peek, bool empty, int preview_x
         min_y = min(min_y, p.y); max_y = max(max_y, p.y);
         min_x = min(min_x, p.x); max_x = max(max_x, p.x);
     }
-    int rows = preview_size - 1;
-    int cols = 2 * preview_size - 2;
-    int pad_y = (rows - (max_y - min_y + 1)) / 2;
+    int rows  = preview_size - 1;
+    int cols  = 2 * preview_size - 2;
+    int pad_y = (rows -     (max_y - min_y + 1)) / 2;
     int pad_x = (cols - 2 * (max_x - min_x + 1)) / 2;
 
     for (int i = 0; i < SHAPE_SIZE; ++i) {
@@ -151,9 +151,9 @@ static void draw_legend(void)
     tdraw_draw_frame(legend_y, legend_x - 1, legend_y + 6, legend_x + 10);
     tdraw_set_color(C_RESET);
     tdraw_draw_at(legend_y, legend_x, C_CYAN "Keys" C_RESET);
-    tdraw_draw_at(legend_y + 1, legend_x, C_MAGENTA"←/→ "C_RESET C_DIM "Move"C_RESET);
-    tdraw_draw_at(legend_y + 2, legend_x, C_MAGENTA"↓   "C_RESET C_DIM "Down"C_RESET);
-    tdraw_draw_at(legend_y + 3, legend_x, C_MAGENTA"R   "C_RESET C_DIM "Rotat"C_RESET);
+    tdraw_draw_at(legend_y + 1, legend_x, C_MAGENTA"R/␣ "C_RESET C_DIM "Rotat"C_RESET);
+    tdraw_draw_at(legend_y + 2, legend_x, C_MAGENTA"←/→ "C_RESET C_DIM "Move"C_RESET);
+    tdraw_draw_at(legend_y + 3, legend_x, C_MAGENTA"↓   "C_RESET C_DIM "Down"C_RESET);
     tdraw_draw_at(legend_y + 4, legend_x, C_MAGENTA"P   "C_RESET C_DIM "Pause"C_RESET);
     tdraw_draw_at(legend_y + 5, legend_x, C_MAGENTA"Q   "C_RESET C_DIM "Quit "C_RESET);
 }
@@ -280,18 +280,20 @@ void ui_game_over(void)
     int h; int w; tdraw_term_size(&h, &w);
     if (state_score() > state_high_score()) { // High Score
         tdraw_set_color(C_BOLD C_GREEN);
-        draw_block(h / 2 - 6, 28, ASCII_HIGH, (int)(sizeof ASCII_HIGH / sizeof *ASCII_HIGH));
+        draw_block(h / 2 - 6, 28, ASCII_HIGH,  (int)(sizeof ASCII_HIGH / sizeof *ASCII_HIGH));
         draw_block(h / 2 + 1, 41, ASCII_SCORE, (int)(sizeof ASCII_SCORE / sizeof *ASCII_SCORE));
     } else { // Game Over
         tdraw_set_color(C_BOLD C_RED);
-        draw_block(h / 2 - 6, 36, ASCII_GAME, (int)(sizeof ASCII_GAME / sizeof *ASCII_GAME));
-        draw_block(h / 2 + 1, 34, ASCII_OVER, (int)(sizeof ASCII_OVER / sizeof *ASCII_OVER));
+        draw_block(h / 2 - 6, 36, ASCII_GAME,  (int)(sizeof ASCII_GAME / sizeof *ASCII_GAME));
+        draw_block(h / 2 + 1, 34, ASCII_OVER,  (int)(sizeof ASCII_OVER / sizeof *ASCII_OVER));
     }
     tdraw_set_color(C_RESET);
 
-    tdraw_draw_at(h / 2 + 8, w / 2 - 6, C_CYAN "Score: " C_RESET C_BOLD "%d"C_RESET, state_score());
-    tdraw_draw_at(h / 2 + 9, w / 2 - 11, C_CYAN "High-Score: " C_BOLD C_MAGENTA "%d"C_RESET, state_high_score());
-    tdraw_draw_centered_line(h / 2 + 11, C_DIM"press ENTER to continue..."C_RESET);
+    tdraw_draw_at(h / 2 + 8,  w / 2 - 6,  C_CYAN "Score: "      C_RESET C_BOLD "%d"C_RESET,   state_score());
+    tdraw_draw_at(h / 2 + 9,  w / 2 - 6,  C_CYAN "lines: "      C_RESET C_BOLD "%d"C_RESET,   state_lines());
+    tdraw_draw_at(h / 2 + 10, w / 2 - 6,  C_CYAN "level: "      C_RESET C_BOLD "%d"C_RESET,   state_level());
+    tdraw_draw_at(h / 2 + 11, w / 2 - 11, C_CYAN "High-Score: " C_BOLD C_MAGENTA "%d"C_RESET, state_high_score());
+    tdraw_draw_centered_line(h / 2 + 13, C_DIM"press ENTER to continue..."C_RESET);
     tdraw_flush();
     InputEvent event = get_user_input(); // continue on ENTER or QUIT only
     while (event != INPUT_SELECT && event != INPUT_QUIT) { event = get_user_input(); }

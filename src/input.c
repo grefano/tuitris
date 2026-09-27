@@ -46,10 +46,10 @@ InputEvent get_user_input(void)
 			case 'c': return INPUT_HOLD; 
 			case 'x': return INPUT_DROP_HARD;
 			case '\n': return INPUT_SELECT;
-            case '+': return INPUT_PLUS;
-            case '-': return INPUT_MINUS;
-            case 'h': return INPUT_HELP;
-            case 'p': return INPUT_PAUSE;
+            case '+' : return INPUT_PLUS;
+            case '-' : return INPUT_MINUS;
+            case 'h' : return INPUT_HELP;
+            case 'p' : return INPUT_PAUSE;
 			case '\033':
 				{
 					char seq[2];
