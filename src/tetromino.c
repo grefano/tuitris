@@ -3,7 +3,6 @@
 #include "color.h"
 #include "board.h"
 
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -250,6 +249,7 @@ TetrominoPeek tetromino_peek_next(void)
     peek.shape = next.shape;
     return peek;
 }
+
 
 TetrominoPeek tetromino_peek_hold(void)
 {

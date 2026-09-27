@@ -56,7 +56,6 @@ void tetromino_hard_drop(void);
 
 TetrominoType tetromino_choose(void);
 
-
 /* Returns 1 if the tetromino is locked in place, 0 otherwise */
 bool tetromino_locked(void);
 
