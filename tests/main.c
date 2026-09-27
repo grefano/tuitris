@@ -5,6 +5,7 @@
 
 void test_board(void);
 void test_state(void);
+void test_tetromino(void);
 
 #define TEST(fn) test(fn, #fn)
 
@@ -23,6 +24,7 @@ int main(void)
 
     TEST(test_board);
     TEST(test_state);
+    TEST(test_tetromino);
 
     fprintf(stderr, "\nAll tests passed!\n");
     return 0;

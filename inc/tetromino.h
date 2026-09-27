@@ -8,6 +8,17 @@
 
 extern bool has_hold;
 
+typedef enum {
+    Straight,
+    Square,
+    T,
+    L,
+    ReverseL,
+    Z,
+    ReverseZ,
+    TETROMINO_COUNT,
+} TetrominoType;
+
 typedef struct { int y; int x; } Pos;
 typedef struct { Pos blocks[SHAPE_SIZE]; } Shape;
 
@@ -42,6 +53,8 @@ void tetromino_hold(void);
 
 /* Drops tetromino instantly to the furthest down free block */
 void tetromino_hard_drop(void);
+
+TetrominoType tetromino_choose(void);
 
 
 /* Returns 1 if the tetromino is locked in place, 0 otherwise */

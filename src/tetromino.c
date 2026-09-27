@@ -3,22 +3,14 @@
 #include "color.h"
 #include "board.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 // === Defines ================================================================
-typedef enum {
-    Straight,
-    Square,
-    T,
-    L,
-    ReverseL,
-    Z,
-    ReverseZ,
-    TETROMINO_COUNT,
-} TetrominoType;
 
+bool has_hold;
 typedef struct {
     Pos           pos;
     TetrominoType type;
@@ -160,7 +152,9 @@ static void create_tetromino(Tetromino* t, TetrominoType type){
 
 }
 static void create_random_tetromino(Tetromino* t){
-  create_tetromino(t, rand() % TETROMINO_COUNT);
+
+  TetrominoType type = tetromino_choose();
+  create_tetromino(t, type);
 }
 
 /* Creates the next tetromino */
@@ -265,3 +259,31 @@ TetrominoPeek tetromino_peek_hold(void)
     return peek;
 }
 
+void create_bag(TetrominoType* bag){
+    for (int i = 0; i < TETROMINO_COUNT; i++){
+      bag[i] = i % TETROMINO_COUNT;
+    }
+    for (int i = TETROMINO_COUNT-1; i >= 0; i--){
+      int j = rand() % (i+1);
+
+      TetrominoType temp = bag[i];
+      bag[i] = bag[j];
+      bag[j] = temp;
+
+    }
+}
+/* */
+TetrominoType tetromino_choose(void){
+  static int index = 0;
+  static TetrominoType bag[TETROMINO_COUNT];
+
+  if (index == 0){
+    create_bag(bag);
+  }
+
+  TetrominoType result = bag[index];
+
+  index = (index+1) % TETROMINO_COUNT;
+
+  return result;
+}
