@@ -3,6 +3,7 @@
 #include "color.h"
 #include "board.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -227,6 +228,18 @@ void tetromino_hold(void)
     }
 
     place_tetromino();
+}
+void tetromino_hard_drop(void)
+{
+    remove_tetromino();
+    while(true){
+	     if (tetromino_locked()){
+	next_tetromino();
+	return;
+	     }
+      move(1, 0); 
+    }
+  printf("toiejaoitjeaei\n");
 }
 
 bool tetromino_locked(void)

@@ -40,6 +40,10 @@ void tetromino_rotate_left(void);
 /* Stores current tetromino and replaces current with the next one */
 void tetromino_hold(void);
 
+/* Drops tetromino instantly to the furthest down free block */
+void tetromino_hard_drop(void);
+
+
 /* Returns 1 if the tetromino is locked in place, 0 otherwise */
 bool tetromino_locked(void);
 
