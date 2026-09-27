@@ -16,13 +16,13 @@
 #include <unistd.h>
 
 #define MAX_DELAY 1000 // ms
-#define MIN_DELAY 100 // ms
+#define MIN_DELAY 100  // ms
 
 // === Variables ==============================================================
 pthread_t tid;
-pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-atomic_int g_delay = MAX_DELAY;
-atomic_bool g_pause = false;
+pthread_mutex_t mtx   = PTHREAD_MUTEX_INITIALIZER;
+atomic_int g_delay    = MAX_DELAY;
+atomic_bool g_pause   = false;
 atomic_bool g_running = true;
 
 // === Helper Functions =======================================================
@@ -35,12 +35,12 @@ static void* input_task(void* args)
         if (g_pause && event != INPUT_PAUSE && event != INPUT_QUIT) continue;
         pthread_mutex_lock(&mtx);
         switch (event) {
-            case INPUT_QUIT: g_running = false; break;
-            case INPUT_PAUSE: if (g_pause) game_resume(); else game_pause(); break;
-            case INPUT_LEFT: tetromino_move_left(); break;
-            case INPUT_RIGHT: tetromino_move_right(); break;
-            case INPUT_DOWN: tetromino_move_down(); break;
-            case INPUT_HELP: help_card(); break;
+            case INPUT_QUIT     : g_running = false; break;
+            case INPUT_PAUSE    : if (g_pause) game_resume(); else game_pause(); break;
+            case INPUT_LEFT     : tetromino_move_left(); break;
+            case INPUT_RIGHT    : tetromino_move_right(); break;
+            case INPUT_DOWN     : tetromino_move_down(); break;
+            case INPUT_HELP     : help_card(); break;
             case INPUT_ROTATE_CW: tetromino_rotate_right(); break;
             default: break;
         }
@@ -79,8 +79,8 @@ void game_init(void)
     tetromino_init();
     tdraw_clear();
     g_running = true;
-    g_pause = false;
-    g_delay = MAX_DELAY;
+    g_pause   = false;
+    g_delay   = MAX_DELAY;
 }
 
 void game_start(void)

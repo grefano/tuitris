@@ -40,13 +40,13 @@ InputEvent get_user_input(void)
 		}
 
 		switch (c) {
-			case 'q': return INPUT_QUIT;
-			case ' ': case 'r': return INPUT_ROTATE_CW;
+			case 'q' : return INPUT_QUIT;
+			case ' ' : case 'r': return INPUT_ROTATE_CW;
 			case '\n': return INPUT_SELECT;
-            case '+': return INPUT_PLUS;
-            case '-': return INPUT_MINUS;
-            case 'h': return INPUT_HELP;
-            case 'p': return INPUT_PAUSE;
+            case '+' : return INPUT_PLUS;
+            case '-' : return INPUT_MINUS;
+            case 'h' : return INPUT_HELP;
+            case 'p' : return INPUT_PAUSE;
 			case '\033':
 				{
 					char seq[2];

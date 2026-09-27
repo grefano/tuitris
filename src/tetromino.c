@@ -19,22 +19,22 @@ typedef enum {
 } TetrominoType;
 
 typedef struct {
-    Pos pos;
+    Pos           pos;
     TetrominoType type;
-    Shape shape;
-    Color color;
+    Shape         shape;
+    Color         color;
 } Tetromino ;
 
 // === Variables ==============================================================
 // Shape position is relative to tetromino position
 static const Shape INITIAL_SHAPES[TETROMINO_COUNT] = {
-    [Straight] = { .blocks = { { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2} } },
-    [Square]   = { .blocks = { { 0, 0 }, { 0, 1 }, { 1, 0 }, { 1, 1 } } },
-    [T]        = { .blocks = { { 0, -1 }, { 0, 0 }, { 0, 1 }, { 1, 0 } } },
-    [L]        = { .blocks = { { -1, 0 }, { 0, 0 }, { 1, 0 }, { 1, 1 } } },
-    [ReverseL] = { .blocks = { { -1, 0 }, { 0, 0 }, { 1, 0 }, { 1, -1 } } },
-    [Z]        = { .blocks = { { -1, 0 }, { 0, 0 }, { 0, 1 }, { 1, 1 } } },
-    [ReverseZ] = { .blocks = { { -1, 0 }, { 0, 0 }, { 0, -1 }, { 1, -1 } } },
+    [Straight] = { .blocks = { { 0,  -1 }, { 0, 0 }, { 0, 1  }, { 0, 2} } },
+    [Square]   = { .blocks = { { 0,  0  }, { 0, 1 }, { 1, 0  }, { 1, 1  } } },
+    [T]        = { .blocks = { { 0,  -1 }, { 0, 0 }, { 0, 1  }, { 1, 0  } } },
+    [L]        = { .blocks = { { -1, 0  }, { 0, 0 }, { 1, 0  }, { 1, 1  } } },
+    [ReverseL] = { .blocks = { { -1, 0  }, { 0, 0 }, { 1, 0  }, { 1, -1 } } },
+    [Z]        = { .blocks = { { -1, 0  }, { 0, 0 }, { 0, 1  }, { 1, 1  } } },
+    [ReverseZ] = { .blocks = { { -1, 0  }, { 0, 0 }, { 0, -1 }, { 1, -1 } } },
 };
 
 static const Color TYPE_COLOR[TETROMINO_COUNT] = {
@@ -149,7 +149,7 @@ static void rotate(int dir)
 static void next_tetromino(void)
 {
     next.pos.y = 1; next.pos.x = 4;
-    next.type = rand() % TETROMINO_COUNT;
+    next.type  = rand() % TETROMINO_COUNT;
     next.shape = INITIAL_SHAPES[next.type];
     next.color = TYPE_COLOR[next.type];
     if (rand() % 2) {

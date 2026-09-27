@@ -45,7 +45,7 @@ void board_init(void)
 {
     for (int i = 0; i < BOARD_ROWS; i++) {
         for (int j = 0; j < BOARD_COLS; j++) {
-            board[i][j].free = 1;
+            board[i][j].free  = 1;
             board[i][j].color = NONE;
         }
     }
@@ -54,14 +54,14 @@ void board_init(void)
 void board_set(int y, int x, Color color)
 {
     if (invalid_pos(y, x)) return;
-    board[y][x].free = 0;
+    board[y][x].free  = 0;
     board[y][x].color = color;
 }
 
 void board_remove(int y, int x)
 {
     if (invalid_pos(y, x)) return;
-    board[y][x].free = 1;
+    board[y][x].free  = 1;
     board[y][x].color = NONE;
 }
 

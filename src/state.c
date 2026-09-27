@@ -41,8 +41,8 @@ static void load_high_score(void)
 // === Public API =============================================================
 void state_init(void)
 {
-    game_state.score = 0;
-    game_state.lines = 0;
+    game_state.score      = 0;
+    game_state.lines      = 0;
     game_state.high_score = 0;
     load_high_score();
 }
