@@ -234,7 +234,6 @@ void tetromino_hard_drop(void)
     remove_tetromino();
     while(true){
 	     if (tetromino_locked()){
-	next_tetromino();
 	return;
 	     }
       move(1, 0); 
