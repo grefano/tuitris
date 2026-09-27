@@ -6,6 +6,8 @@
 
 #define SHAPE_SIZE 4
 
+extern bool has_hold;
+
 typedef struct { int y; int x; } Pos;
 typedef struct { Pos blocks[SHAPE_SIZE]; } Shape;
 
@@ -35,11 +37,15 @@ void tetromino_rotate_right(void);
 /* Rotates the tetromino counterclockwise if it can */
 void tetromino_rotate_left(void);
 
+/* Stores current tetromino and replaces current with the next one */
+void tetromino_hold(void);
+
 /* Returns 1 if the tetromino is locked in place, 0 otherwise */
 bool tetromino_locked(void);
 
 /* Returns peak of the next tetromino */
 TetrominoPeek tetromino_peek_next(void);
+TetrominoPeek tetromino_peek_hold(void);
 
 #endif // !TETROMINO_H
 
