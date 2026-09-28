@@ -2,12 +2,10 @@
 #define TETROMINO_H
 
 #include "color.h"
+
 #include <stdbool.h>
 
 #define SHAPE_SIZE 4
-
-extern bool has_hold;
-extern bool holded;
 
 typedef struct { int y; int x; } Pos;
 typedef struct { Pos blocks[SHAPE_SIZE]; } Shape;
@@ -44,6 +42,11 @@ void tetromino_hold(void);
 /* Drops tetromino instantly to the furthest down free block */
 void tetromino_hard_drop(void);
 
+/* returns true if there is currently an holded tetromino */
+bool tetromino_has_hold(void);
+
+/* returns true if the tetromino as been hold */
+bool tetromino_holded(void);
 
 /* Returns 1 if the tetromino is locked in place, 0 otherwise */
 bool tetromino_locked(void);

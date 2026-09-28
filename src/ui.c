@@ -121,7 +121,7 @@ static void draw_next_preview(void)
 
 static void draw_hold_preview(void){
     int preview_y = y + 1; int preview_x = x - BOARD_WIDTH + 10;
-    draw_tetromino_preview(tetromino_peek_hold(), !has_hold, preview_x, preview_y);
+    draw_tetromino_preview(tetromino_peek_hold(), !tetromino_has_hold(), preview_x, preview_y);
 }
 
 /* Draw game state */
