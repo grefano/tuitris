@@ -7,6 +7,7 @@
 #define SHAPE_SIZE 4
 
 extern bool has_hold;
+extern bool holded;
 
 typedef struct { int y; int x; } Pos;
 typedef struct { Pos blocks[SHAPE_SIZE]; } Shape;

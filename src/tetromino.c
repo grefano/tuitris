@@ -53,6 +53,7 @@ static Tetromino next;
 static Tetromino hold;
 
 bool has_hold;
+bool holded;
 
 // === Helper Functions =======================================================
 /* Returns the position of the i'th block */
@@ -168,6 +169,7 @@ static void create_random_tetromino(Tetromino* t){
 /* Creates the next tetromino */
 static void next_tetromino(void)
 {
+    holded = false;
     create_random_tetromino(&next);
 }
 
@@ -175,6 +177,7 @@ static void next_tetromino(void)
 void tetromino_init(void)
 {
     has_hold = false;
+    holded = false;
     next_tetromino();
 }
 
@@ -214,8 +217,15 @@ void tetromino_rotate_left(void)
     place_tetromino();
 }
 
+bool can_hold(void){
+  return !holded;
+}
+
 void tetromino_hold(void)
 {
+    if (!can_hold()){
+	return;
+    }
     remove_tetromino();
 
     Tetromino previous_hold = hold;
@@ -228,6 +238,7 @@ void tetromino_hold(void)
     }
 
     place_tetromino();
+    holded = true;
 }
 
 void tetromino_hard_drop(void)
