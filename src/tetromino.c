@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define UNREACHABLE(...) do { fprintf(stderr, "UNREACHABLE: \n"__VA_ARGS__); abort(); } while (0)
 // === Defines ================================================================
 typedef enum {
     Straight,
@@ -52,8 +53,8 @@ static Tetromino t;
 static Tetromino next;
 static Tetromino hold;
 
-bool has_hold;
-bool holded;
+bool tetromino_has_hold;
+bool tetromino_holded;
 
 // === Helper Functions =======================================================
 /* Returns the position of the i'th block */
@@ -169,15 +170,15 @@ static void create_random_tetromino(Tetromino* t){
 /* Creates the next tetromino */
 static void next_tetromino(void)
 {
-    holded = false;
+    tetromino_holded = false;
     create_random_tetromino(&next);
 }
 
 // === Public API =============================================================
 void tetromino_init(void)
 {
-    has_hold = false;
-    holded   = false;
+    tetromino_has_hold = false;
+    tetromino_holded   = false;
     next_tetromino();
 }
 
@@ -219,7 +220,7 @@ void tetromino_rotate_left(void)
 
 void tetromino_hold(void)
 {
-    if (holded){
+    if (tetromino_holded){
         return;
     }
     remove_tetromino();
@@ -227,26 +228,25 @@ void tetromino_hold(void)
     Tetromino previous_hold = hold;
     create_tetromino(&hold, t.type);
 
-    t = has_hold ? previous_hold : next;
-    if (!has_hold){
+    t = tetromino_has_hold ? previous_hold : next;
+    if (!tetromino_has_hold){
         next_tetromino();
-        has_hold = true;
+        tetromino_has_hold = true;
     }
 
     place_tetromino();
-    holded = true;
+    tetromino_holded = true;
 }
 
 void tetromino_hard_drop(void)
 {
-    remove_tetromino();
     while(true){
         if (tetromino_locked()){
             return;
         }
         move(1, 0);
     }
-    fprintf(stderr, "UNREACHABLE\n"); abort();
+    UNREACHABLE("tetromino_hard_drop");
 }
 
 bool tetromino_locked(void)
