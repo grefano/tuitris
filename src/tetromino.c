@@ -52,6 +52,8 @@ static Tetromino t;
 static Tetromino next;
 static Tetromino hold;
 
+bool has_hold;
+
 // === Helper Functions =======================================================
 /* Returns the position of the i'th block */
 static Pos block_pos(int i)
@@ -157,10 +159,10 @@ static void create_tetromino(Tetromino* t, TetrominoType type){
             rotate_block(&t->shape.blocks[i], 1);
         }
     }
-
 }
+
 static void create_random_tetromino(Tetromino* t){
-  create_tetromino(t, rand() % TETROMINO_COUNT);
+    create_tetromino(t, rand() % TETROMINO_COUNT);
 }
 
 /* Creates the next tetromino */
@@ -173,7 +175,6 @@ static void next_tetromino(void)
 void tetromino_init(void)
 {
     has_hold = false;
-    
     next_tetromino();
 }
 
@@ -218,28 +219,28 @@ void tetromino_hold(void)
     remove_tetromino();
 
     Tetromino previous_hold = hold;
-    
-    create_tetromino(&hold, t.type); 
+    create_tetromino(&hold, t.type);
 
     t = has_hold ? previous_hold : next;
     if (!has_hold){
-	next_tetromino();
-	has_hold = true;
+        next_tetromino();
+        has_hold = true;
     }
 
     place_tetromino();
 }
+
 void tetromino_hard_drop(void)
 {
     remove_tetromino();
     while(true){
-	     if (tetromino_locked()){
-	next_tetromino();
-	return;
-	     }
-      move(1, 0); 
+        if (tetromino_locked()){
+            next_tetromino();
+            return;
+        }
+        move(1, 0);
     }
-  printf("toiejaoitjeaei\n");
+    fprintf(stderr, "UNREACHABLE\n"); abort();
 }
 
 bool tetromino_locked(void)

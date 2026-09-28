@@ -80,16 +80,17 @@ static void draw_frame(void)
     tdraw_set_color(C_RESET);
     tdraw_draw_at(y, x + 8 , C_DIM C_BLUE "<" C_RESET C_BOLD C_CYAN " TUITRIS " C_RESET C_DIM C_BLUE ">" C_RESET);
 }
+
 static void draw_tetromino_preview(TetrominoPeek peek, bool empty, int preview_x, int preview_y){
+    if (empty){
+        return;
+    }
+
     int preview_size = PANEL_WIDTH / 2 - 2;
     tdraw_set_color(C_DIM C_BLUE);
     tdraw_draw_frame(preview_y, preview_x - 1, preview_y + preview_size, preview_x + 2 * preview_size);
     tdraw_set_color(C_RESET);
     tdraw_draw_at(preview_y, preview_x + 1, C_CYAN "Next" C_RESET);
-
-    if (empty){
-    return;
-  }
 
     int min_y = peek.shape.blocks[0].y; int max_y = min_y;
     int min_x = peek.shape.blocks[0].x; int max_x = min_x;
@@ -114,15 +115,13 @@ static void draw_tetromino_preview(TetrominoPeek peek, bool empty, int preview_x
 /* Draw board and panel frames */
 static void draw_next_preview(void)
 {
-  int preview_y = y + 1; int preview_x = x + BOARD_WIDTH + 6;
-  draw_tetromino_preview(tetromino_peek_next(), false, preview_x, preview_y);
+    int preview_y = y + 1; int preview_x = x + BOARD_WIDTH + 6;
+    draw_tetromino_preview(tetromino_peek_next(), false, preview_x, preview_y);
 }
 
 static void draw_hold_preview(void){
-  int preview_y = y + 1; int preview_x = x - BOARD_WIDTH + 6;
-  draw_tetromino_preview(tetromino_peek_hold(), !has_hold, preview_x, preview_y);
-
-
+    int preview_y = y + 1; int preview_x = x - BOARD_WIDTH + 6;
+    draw_tetromino_preview(tetromino_peek_hold(), !has_hold, preview_x, preview_y);
 }
 
 /* Draw game state */
