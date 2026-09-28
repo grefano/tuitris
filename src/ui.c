@@ -24,8 +24,8 @@
 #define DRAW_START_X(w) (((w) - FRAME_WIDTH) / 2 + 1)
 
 // === Variables ==============================================================
-static int y;
-static int x;
+static int y;  // initialized in ui_draw_game()
+static int x;  // initialized in ui_draw_game()
 
 // === Helper Functions =======================================================
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -120,7 +120,7 @@ static void draw_next_preview(void)
 }
 
 static void draw_hold_preview(void){
-    int preview_y = y + 1; int preview_x = x - BOARD_WIDTH + 6;
+    int preview_y = y + 1; int preview_x = x - BOARD_WIDTH + 10;
     draw_tetromino_preview(tetromino_peek_hold(), !has_hold, preview_x, preview_y);
 }
 
@@ -173,7 +173,7 @@ static void draw_block(int top, int width, const char** lines, int count)
 void ui_validate(void)
 {
     int require_y = BOARD_HIGHT + 4;
-    int require_x = BOARD_WIDTH + PANEL_WIDTH + 8;
+    int require_x = BOARD_WIDTH + 3 * PANEL_WIDTH + 8;
     while (!tdraw_term_size_ok(require_y, require_x)) {
         tdraw_delay(10);
     }

@@ -177,7 +177,7 @@ static void next_tetromino(void)
 void tetromino_init(void)
 {
     has_hold = false;
-    holded = false;
+    holded   = false;
     next_tetromino();
 }
 
@@ -217,14 +217,10 @@ void tetromino_rotate_left(void)
     place_tetromino();
 }
 
-bool can_hold(void){
-  return !holded;
-}
-
 void tetromino_hold(void)
 {
-    if (!can_hold()){
-	return;
+    if (holded){
+        return;
     }
     remove_tetromino();
 
