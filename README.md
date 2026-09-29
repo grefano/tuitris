@@ -33,7 +33,7 @@ make run    # build and run
 | R or Space | Rotate clockwise |
 | Z | Rotate counter-clockwise |
 | X | Hard drop |
-| C | Hold |
+| C | Hold a peice |
 | P | Pause / resume |
 | H | Show help |
 | Q | Quit to menu |
