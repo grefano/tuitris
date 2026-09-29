@@ -15,6 +15,9 @@ typedef struct {
     Color color;
 } TetrominoPeek;
 
+extern bool tetromino_has_hold;
+extern bool tetrmonio_holded;
+
 /* Initialize the first tetromino */
 void tetromino_init(void);
 
@@ -41,12 +44,6 @@ void tetromino_hold(void);
 
 /* Drops tetromino instantly to the furthest down free block */
 void tetromino_hard_drop(void);
-
-/* returns true if there is currently an holded tetromino */
-bool tetromino_has_hold(void);
-
-/* returns true if the tetromino as been hold */
-bool tetromino_holded(void);
 
 /* Returns 1 if the tetromino is locked in place, 0 otherwise */
 bool tetromino_locked(void);
