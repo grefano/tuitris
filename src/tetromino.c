@@ -53,8 +53,8 @@ static Tetromino t;
 static Tetromino next;
 static Tetromino hold;
 
-bool tetromino_has_hold;
-bool tetromino_holded;
+bool has_hold;
+bool holded;
 
 // === Helper Functions =======================================================
 /* Returns the position of the i'th block */
@@ -170,15 +170,15 @@ static void create_random_tetromino(Tetromino* t){
 /* Creates the next tetromino */
 static void next_tetromino(void)
 {
-    tetromino_holded = false;
+    holded = false;
     create_random_tetromino(&next);
 }
 
 // === Public API =============================================================
 void tetromino_init(void)
 {
-    tetromino_has_hold = false;
-    tetromino_holded   = false;
+    has_hold = false;
+    holded   = false;
     next_tetromino();
 }
 
@@ -220,7 +220,7 @@ void tetromino_rotate_left(void)
 
 void tetromino_hold(void)
 {
-    if (tetromino_holded){
+    if (holded){
         return;
     }
     remove_tetromino();
@@ -228,14 +228,14 @@ void tetromino_hold(void)
     Tetromino previous_hold = hold;
     create_tetromino(&hold, t.type);
 
-    t = tetromino_has_hold ? previous_hold : next;
-    if (!tetromino_has_hold){
+    t = has_hold ? previous_hold : next;
+    if (!has_hold){
         next_tetromino();
-        tetromino_has_hold = true;
+        has_hold = true;
     }
 
     place_tetromino();
-    tetromino_holded = true;
+    holded = true;
 }
 
 void tetromino_hard_drop(void)
@@ -247,6 +247,16 @@ void tetromino_hard_drop(void)
         move(1, 0);
     }
     UNREACHABLE("tetromino_hard_drop");
+}
+
+bool tetromino_has_hold(void)
+{
+    return has_hold;
+}
+
+bool tetromino_holded(void)
+{
+    return holded;
 }
 
 bool tetromino_locked(void)
