@@ -29,7 +29,7 @@ static void draw_help_box(int top, int left)
     tdraw_draw_at(top + 14, left + 5, C_RESET C_MAGENTA     "←/→      " C_RESET C_DIM " Move left / right");
     tdraw_draw_at(top + 15, left + 5, C_RESET C_MAGENTA     "↓        " C_RESET C_DIM " Move down");
     tdraw_draw_at(top + 16, left + 5, C_RESET C_MAGENTA     "X        " C_RESET C_DIM " Hard drop");
-    tdraw_draw_at(top + 17, left + 5, C_RESET C_MAGENTA     "C        " C_RESET C_DIM " Hold");
+    tdraw_draw_at(top + 17, left + 5, C_RESET C_MAGENTA     "C        " C_RESET C_DIM " Hold a piece");
     tdraw_draw_at(top + 18, left + 5, C_RESET C_MAGENTA     "P        " C_RESET C_DIM " Pause / resume");
     tdraw_draw_at(top + 19, left + 5, C_RESET C_MAGENTA     "H        " C_RESET C_DIM " Show this help");
     tdraw_draw_at(top + 20, left + 5, C_RESET C_MAGENTA     "Q        " C_RESET C_DIM " Quit to menu");
